@@ -13,10 +13,15 @@ server.listen(3000);
 console.log('Server start!');
 
 function getFromClient(request, response) {
-	let url_parts = url.parse(request.url);
+	let url_parts = url.parse(request.url, true);
 	switch (url_parts.pathname) {
 
 		case '/':
+			var content = "これはIndexページです！"
+			var query = url_parts.query;
+			if (query.msg != undefined) {
+				var query_obj = content += 'あなたは、「' + query.msg + 'と送りました。';
+			}
 			var content = ejs.render(index_page, {
 				title: "Index",
 				content: "これはレンプレサイト",
