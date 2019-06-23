@@ -52,15 +52,19 @@ function response_index(request, response) {
 
 function response_other(request, response) {
 	var msg = "これはOtherページです"
-	if(request.method == 'POST') {
+	if(request.method == 'POST') {//.methodで、リクエストの方式を調べる。
 		var body = '';
 
+		//オブジェクト.on（イベント名, 関数）でイベント発生の処理。
+		//オブジェクトにイベントに応じて呼び出される関数を設定する事が出来る。
+		//dataイベントは、クライアントからデータを受け取ると発生するイベント。
 		request.on('data', (data) => {
 			body += data;
 		});
 
+		//データの受け取りが完了したら発生するイベント。
 		request.on('end', () => {
-			var port_data = qs.parse(body); //データのパース
+			var port_data = qs.parse(body); //受け取ったデータのエンコード＝パースして使える様にしている。
 			msg += 'あなたは、「' + port_data.msg + '」と書きました。';
 			var content = ejs.render(other_page, {
 				title:'Other',
