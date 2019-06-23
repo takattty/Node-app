@@ -20,21 +20,11 @@ function getFromClient(request, response) {
 			var content = "これはIndexページです！"
 			var query = url_parts.query;
 			if (query.msg != undefined) {
-				var query_obj = content += 'あなたは、「' + query.msg + 'と送りました。';
+				var query_obj = content += 'あなたは、「' + query.msg + '」と送りました。';
 			}
 			var content = ejs.render(index_page, {
-				title: "Index",
-				content: "これはレンプレサイト",
-			});
-			response.writeHead(200, { 'Content-Type': 'text/html' });
-			response.write(content);
-			response.end();
-			break;
-			  
-		case '/other':
-			var content = ejs.render(other_page, {
-				title: "other",
-				content: "これはotherレンプレサイト",
+				title:"Index",
+				content:content,
 			});
 			response.writeHead(200, { 'Content-Type': 'text/html' });
 			response.write(content);
